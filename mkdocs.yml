@@ -2,7 +2,7 @@ site_name: Template Python Repo
 site_description: Probably not finished.
 site_author: The repo's creator.
 
-repo_name: GitHub source
+repo_name: GitHub
 repo_url: https://github.com/{username}/{repo}
 edit_uri: blob/main/docs/
 

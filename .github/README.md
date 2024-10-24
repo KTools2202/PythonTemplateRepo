@@ -1,5 +1,9 @@
 # PythonTemplateRepo
 
+![Works on Windows badge](./docs/badges/works-on-windows-cozy-minimal.svg)
+![Works on Mac badge](./docs/badges/works-on-mac-cozy-minimal.svg)
+![Works on Linux badge](./docs/badges/works-on-linux-cozy-minimal.svg)
+
 Template repo for getting started with a Python project.
 
 ## Getting started

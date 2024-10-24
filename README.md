@@ -1,8 +1,12 @@
 # PythonTemplateRepo
 
-![Made in Python badge](../images/made-in-python.svg)
+![Made in Python badge](./docs/badges/made-in-python.svg)
 
-[Image credits](../image-credits.md)
+![Works on Windows badge](./docs/badges/works-on-windows-cozy.svg)
+![Works on Mac badge](./docs/badges/works-on-mac-cozy.svg)
+![Works on Linux badge](./docs/badges/works-on-linux-cozy.svg)
+
+[Image credits](./image-credits.md)
 
 This is a basic README template. Feel free to customise it to your liking.
 
