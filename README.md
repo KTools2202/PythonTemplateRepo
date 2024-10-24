@@ -2,6 +2,8 @@
 
 ![Made in Python badge](../images/made-in-python.svg)
 
+[Image credits](../image-credits.md)
+
 This is a basic README template. Feel free to customise it to your liking.
 
 ## Features
