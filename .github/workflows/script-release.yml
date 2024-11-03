@@ -38,7 +38,7 @@ jobs:
           pip install -r requirements.txt
 
       - name: PyInstaller
-        run: pyinstaller --onefile --windowed main.py --name ${{ github.repository }}_${{ github.ref_name }}_${{ matrix.os }}
+        run: pyinstaller --onefile --windowed main.py --name ${{ github.repository_id }}_${{ matrix.os }}
 
       - name: List dist directory
         run: ls -R dist
@@ -46,9 +46,33 @@ jobs:
       - name: Tar files on Linux
         if: ${{ matrix.runner_os == 'ubuntu-latest' }}
         run: |
-            chmod +x dist/${{ github.repository }}_${{ github.ref_name }}_${{ matrix.os }}
-            tar -czvf dist/${{ github.repository }}_${{ github.ref_name }}_${{ matrix.os }}.tar.gz dist/${{ github.repository }}_${{ github.ref_name }}_${{ matrix.os }}
-            rm -rf dist/${{ github.repository }}_${{ github.ref_name }}_${{ matrix.os }}
+          chmod +x dist/${{ github.repository_id }}_${{ matrix.os }}
+          tar -czvf dist/${{ github.repository_id }}@${{ github.ref_name }}_${{ matrix.os }}.tar.gz dist/${{ github.repository_id }}_${{ matrix.os }}
+          rm -rf dist/${{ github.repository_id }}_${{ matrix.os }}
+      
+      - name: Zip artifact on Mac
+        if: ${{ matrix.runner_os == 'macos-latest' }}
+        run: |
+          zip -r ${{ github.repository_id }}@${{ github.ref_name }}_${{ matrix.os }}.zip dist/
+          rm -rf dist/
+          mkdir dist/
+          mv ${{ github.repository_id }}@${{ github.ref_name }}_${{ matrix.os }}.zip dist/
+      
+      - name: Zip files on Windows
+        if: ${{ matrix.runner_os == 'windows-latest' }}
+        run: |
+          $itemsToZip = @(".\dist\${{ matrix.os }}_cmd-release", ".\dist\${{ matrix.os }}_cli-release")
+          Compress-Archive -Path $itemsToZip -DestinationPath ".\dist\${{ github.repository_id }}@${{ github.ref_name }}_${{ matrix.os }}.zip"
+          if (Test-Path ".\dist\${{ github.repository_id }}@${{ github.ref_name }}_${{ matrix.os }}.zip") { 
+            foreach ($item in $itemsToZip) {
+              Remove-Item -Path $item -Recurse -Force
+            }
+            Write-Output "Files zipped and originals deleted successfully."
+            exit 0
+          } else {
+            Write-Output "Failed to create zip file. Source files were not deleted."
+            exit 1
+          }
 
       - name: Upload debug builds
         uses: actions/upload-artifact@v4
@@ -82,7 +106,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           generateReleaseNotes: true
           tag: ${{ github.ref_name }}
-          artifacts: 
+          artifacts: release-artifacts/*_dists/${{ github.repository_id }}_*
           draft: true
           name: "${{ github.repository }}_${{ github.ref_name }}_*"
           body: "Need help? Refer to the documentation site."

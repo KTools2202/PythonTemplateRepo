@@ -51,6 +51,13 @@ coverage.xml
 .pytest_cache/
 cover/
 
+# Pytest results should not be uploaded to version control, as they are not needed.
+# However, pytest doesn't usually output results into a file, so people may use >>
+# to direct output to a file.
+# The recommended file name is pytest_results, which is commented below.
+# Uncomment to ignore the file name.
+#pytest_results
+
 # Translations
 *.mo
 *.pot
