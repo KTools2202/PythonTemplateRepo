@@ -75,13 +75,13 @@ jobs:
           }
 
       - name: Upload debug builds
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: ${{ matrix.os }}_builds
           path: build/*
 
       - name: Upload distributable builds
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: ${{ matrix.os }}_dists
           path: dist/*

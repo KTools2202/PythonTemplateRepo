@@ -31,13 +31,13 @@ jobs:
               run: pyinstaller main.py --name ${{ github.repository_owner }}-${{ github.repository_id }}@${{ github.sha }}_${{ matrix.os }}
 
             - name: Upload Builds
-              uses: actions/upload-artifact@v4
+              uses: actions/upload-artifact@v5
               with:
                 name: ${{ matrix.os }} build
                 path: build/*
 
             - name: Upload Dists
-              uses: actions/upload-artifact@v4
+              uses: actions/upload-artifact@v5
               with:
                 name: ${{ matrix.os }} dist
                 path: dist/*
