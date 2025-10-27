@@ -33,7 +33,7 @@ jobs:
             
             - name: Upload test results
               if: ${{ steps.pytest.outcome != cancelled() }}
-              uses: actions/upload-artifact@v4
+              uses: actions/upload-artifact@v5
               with:
                 name: Pytest results
                 path: ${{ github.sha }}-pytest-results
